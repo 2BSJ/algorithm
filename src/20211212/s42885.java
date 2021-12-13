@@ -11,34 +11,15 @@ public class s42885 {
      */
     public static void main(String[] args) {
         s42885 problem = new s42885();
-        int[] people = {70,50,80,50};
+        int[] people = {70,80,50};
         int limit = 100;
-        problem.solution(people,limit);
+        problem.solution1(people,limit);
     }
 
     /**
-     * 인터넷 풀이
-     */
-    public int solution(int[] people, int limit) {
-        int answer = 0;
-
-        Arrays.sort(people);
-
-        int min = 0;
-
-        for (int max = people.length - 1; min <= max; max--) {
-            if (people[min] + people[max] <= limit) min++;
-            answer++;
-        }
-
-        return answer;
-    }
-
-    /**
-     *
      * 내 풀이
      */
-    public int solution1(int[] people, int limit) {
+    public int solution(int[] people, int limit) {
         int answer = 0;
         int tempAnswer = 0;
         Arrays.sort(people);
@@ -52,16 +33,36 @@ public class s42885 {
                 return answer;
             }
             if(peopleList.get(i) + peopleList.get(peopleList.size()-answer-1) <= limit) {
-                answer++;
-                tempAnswer += 2;
-            } else {
-                if(i>0) {
-                    i--;
+                if(i != peopleList.size()-answer-1) {
+                    tempAnswer += 2;
+                } else {
+                    tempAnswer++;
                 }
+                answer++;
+            } else {
+                i--;
                 tempAnswer++;
                 answer++;
             }
         }
+        return answer;
+    }
+
+    /**
+     * 인터넷 풀이
+     */
+    public int solution1(int[] people, int limit) {
+        int answer = 0;
+
+        Arrays.sort(people);
+
+        int min = 0;
+
+        for (int max = people.length - 1; min <= max; max--) {
+            if (people[min] + people[max] <= limit) min++;
+            answer++;
+        }
+
         return answer;
     }
 }
